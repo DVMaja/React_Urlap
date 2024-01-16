@@ -1,45 +1,55 @@
-import { useState } from "react"
+import { useState } from "react";
+
 export default function FormComponens(props) {
+    //const [nev, setNev] = useState("")
+    //const [szulev, setSzulev] = useState(2000)
 
-    //const { nev, setNev } = useState("");
-    //már nem ezeket használjuk
-    //const { szulev, setEv } = useState(2000);
-
-    const { obj, setObj } = useState({
+    const [obj, setObj] = useState({
         nev: "",
-        szulev: 2000,
+        szulEv: 2000,
     })
 
     function valtozasKezeles(event) {
-        console.log(event.target.value);
-        let sv = {...obj}//segéd változó
-
-        sv[event.target.id] = event.target.value;
-        setObj({...sv});
-
+        console.log(event.target.value)
+        //segéd változó
+        let sv = { ...obj }
+        sv[event.target.id] = event.target.value
+        setObj({ ...sv });
+        //setNev(event.target.value)
     }
-    function adatkuld(event) {
-        event.preventDefault();
-        console.log(obj);
-        props.adatkuld(obj);
+
+    function adatKuld(event) {
+        event.preventDefault()
+        console.log(obj)
+        props.adatKuld(obj)
     }
 
     return (
-        <form onSubmit={adatkuld}>
+        <form onSubmit={adatKuld}>
             <div>
                 <label htmlFor="nev">Név</label>
-                <input type="text" id="nev" name="nev"
-                    placeholder="vezetéknév keresztnév"
+                <input
+                    type="text"
+                    id="nev"
+                    name="nev"
                     value={obj.nev}
-                    onChange={valtozasKezeles}></input>
+                    placeholder="Vezetéknév Keresztnév"
+                    onChange={valtozasKezeles}
+                ></input>
             </div>
-
             <div>
-                <label htmlFor="szulev">Születési év</label>
-                <input type="number" id="szulev" name="szulev" value={obj.szulev} min={1980} max={2024}
-                    onChange={valtozasKezeles}></input>
+                <label htmlFor="szulEv">Év</label>
+                <input
+                    type="text"
+                    id="szulEv"
+                    name="szulEv"
+                    value={obj.szulEv}
+                    min="1900"
+                    max="2024"
+                    onChange={valtozasKezeles}
+                ></input>
             </div>
-
+            <input type="submit" id="submit" name="submit" value="Küld"></input>
         </form>
-    )
+    );
 }
